@@ -1,0 +1,24 @@
+{
+  "title": "old user",
+  "description": "describes properties required to update a user",
+  "type": "object",
+  "properties": {
+    "username": {
+      "type": "string",
+      "description": "username of the user"
+    },
+    "password": {
+      "type": "string",
+      "description": "password of the user"
+    },
+    "id": {
+      "type": "integer",
+      "description": "id of account"
+    },
+    "currency": {
+      "type": "integer",
+      "description": "currency of account"
+    }
+  },
+  "required": ["username", "password", "id","currency"]
+}
