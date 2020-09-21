@@ -4,5 +4,16 @@
   "description": "apiDoc basic example",
   "title": "Custom apiDoc browser title",
   "url": "https://api.github.com/v1",
-  "devDependencies": {}
+  "devDependencies": {},
+  "dependencies": {
+    "ajv": "^6.12.5",
+    "axios": "^0.20.0",
+    "cookie-parser": "^1.4.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "mysql": "^2.18.1",
+    "passport": "^0.4.1",
+    "passport-json": "^1.2.0",
+    "xml2js": "^0.4.23"
+  }
 }

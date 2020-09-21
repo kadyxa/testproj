@@ -16,7 +16,7 @@
       "description": "id of account"
     },
     "currency": {
-      "type": "integer",
+      "type": "string",
       "description": "currency of account"
     }
   },

@@ -12,7 +12,7 @@
       "description": "username of account"
     },
     "currency": {
-      "type": "integer",
+      "type": "string",
       "description": "username of account"
     }
   },

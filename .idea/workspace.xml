@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="52286686-59da-4d59-92eb-6d4eed8dc354" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/res_srv/db/currencies.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res_srv/validate/old-transation.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apidoc.json" beforeDir="false" afterPath="$PROJECT_DIR$/apidoc.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res_srv/db/transation.js" beforeDir="false" afterPath="$PROJECT_DIR$/res_srv/db/transation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res_srv/db/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/res_srv/db/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res_srv/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/res_srv/routes/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res_srv/validate/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/res_srv/validate/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res_srv/validate/new-user.json" beforeDir="false" afterPath="$PROJECT_DIR$/res_srv/validate/new-user.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res_srv/validate/old-user.json" beforeDir="false" afterPath="$PROJECT_DIR$/res_srv/validate/old-user.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res_srv/validate/transation-insert.json" beforeDir="false" afterPath="$PROJECT_DIR$/res_srv/validate/new-transation.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1hlskuOHJU5Q9JHDRvurPHMvNy9" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/res_srv/validate" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\kadyxa\Desktop\testproj\res_srv\validate" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="52286686-59da-4d59-92eb-6d4eed8dc354" name="Default Changelist" comment="" />
+      <created>1600597159667</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1600597159667</updated>
+      <workItem from="1600597161165" duration="611000" />
+      <workItem from="1600599765483" duration="1784000" />
+      <workItem from="1600672948905" duration="1747000" />
+      <workItem from="1600674793004" duration="1881000" />
+      <workItem from="1600676712040" duration="1777000" />
+      <workItem from="1600679443189" duration="1902000" />
+      <workItem from="1600681988795" duration="1778000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="616" y="240" key="run.anything.popup" timestamp="1600680128246">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1600680128246" />
+    <state x="383" y="180" width="672" height="678" key="search.everywhere.popup" timestamp="1600600903491">
+      <screen x="0" y="0" width="1440" height="860" />
+    </state>
+    <state x="383" y="180" width="672" height="678" key="search.everywhere.popup/0.0.1440.860@0.0.1440.860" timestamp="1600600903491" />
+  </component>
+</project>

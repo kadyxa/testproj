@@ -64,7 +64,7 @@ user.findById = (user) => {
 
 
 
-user.getTransactionsАmountById = (id) =>{
+user.getTransactionsAmountById = (id) =>{
 
     return new Promise((resolve,reject) => {
         const connection = mysql.createConnection(database);
@@ -85,7 +85,7 @@ user.getTransactionsАmountById = (id) =>{
                 throw err;
             }
             connection.end();
-            return resolve(rows);
+            return resolve(rows[0]);
         });
     });
 };
