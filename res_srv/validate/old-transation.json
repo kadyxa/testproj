@@ -1,0 +1,28 @@
+{
+  "title": "new transaction",
+  "description": "describes properties required to create a transaction",
+  "type": "object",
+  "properties": {
+    "userid": {
+      "type": "integer",
+      "description": "id of the user"
+    },
+    "amount": {
+      "type": "number",
+      "description": "amount of transaction"
+    },
+    "currency": {
+      "type": "integer",
+      "description": "currency of transaction"
+    },
+    "date": {
+      "type": "string",
+      "description": "date of transaction"
+    },
+    "type": {
+      "type": "boolean",
+      "description": "type of transaction(true/false - income/expense)"
+    }
+  },
+  "required": ["userid", "amount", "currency","date"]
+}
