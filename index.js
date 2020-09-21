@@ -1,5 +1,3 @@
-const http = require('./res_srv/http');
-
 const express = require('express');
 
 const expressSession = require('express-session');
