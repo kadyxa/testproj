@@ -3,8 +3,6 @@ const express = require('express');
 
 const axios = require('axios');
 
-//const xml2js = require('xml2js');
-
 const router = express.Router();
 
 const validateSchema = require('../validate');
@@ -12,25 +10,26 @@ const validateSchema = require('../validate');
 const curensisArr = require('../db/currencies');
 
 const db = require('../db');
+
 const xml2js = require('xml2js');
 
 
 module.exports = (app,passport)=>{
 
-require('../auth/passport')(passport);
+    require('../auth/passport')(passport);
 
-app.use(router);
-
-
+    app.use(router);
 
 
 
-function checkAdminPermissions(req){
-    return req.user.role === 1
-}
 
 
+    function checkAdminPermissions(req){
+        return req.user.role === 1
+    }
 
+
+// server start ================================//
 
     /**
      * @api {get} / Sever Status information
@@ -47,10 +46,26 @@ function checkAdminPermissions(req){
      *
      */
 
-router.get('/',(req,res,next) => {
-      res.json( {sever:'is working'} );
-});
+    router.get('/',(req,res,next) => {
+        res.json( {sever:'is working'} );
+    });
 
+    /**
+     * @api {get} /date get date
+     * @apiName GetDate
+     * @apiGroup Server
+     * @apiSuccessExample Success-Response:
+     *     HTTP/1.1 200 OK
+     *     {
+     *        "date": "2020-09-21T10:54:51.406Z"
+     *    }
+     */
+
+    router.get('/date',function (req,res){
+        res.json({date:new Date()});
+    });
+
+// server end ================================//
 
 // user start ==========================================================//
 
@@ -61,12 +76,14 @@ router.get('/',(req,res,next) => {
      *
      * @apiSuccess {String} JSONStatus Status of the Sever.
      *
-     * @apiParamExample {json} Request-Example:
+     * @apiParamExample {json} Param-Example:
      *     {
      *       "username":"admin",
      *       "password":"admin",
      *       "currency":"RUB"
      *     }
+     *
+     * @apiParam {String} required_variable {"username": "admin","password": "admin","currency": "RUB"}
      *
      * @apiPermission admin
      *
@@ -84,12 +101,12 @@ router.get('/',(req,res,next) => {
      *       "err":"not authenticated"
      *     }
      */
-router.post('/createUser', validateSchema('new-user'),(req, res,next) => {
-            let item = req.body;
-            db.user.insert (item).then( result => {
-                res.json( result );
-            });
-});
+    router.post('/createUser', validateSchema('new-user'),(req, res,next) => {
+        let item = req.body;
+        db.user.insert (item).then( result => {
+            res.json( result );
+        });
+    });
 
 
     /**
@@ -100,6 +117,20 @@ router.post('/createUser', validateSchema('new-user'),(req, res,next) => {
      * @apiPermission admin
      *
      * @apiSuccess {String} JSONStatus Status of the Sever.
+     *
+     *
+     * @apiParamExample {json} Param-Example:
+     *     {
+     *       "id":1,
+     *       "role":1,
+     *       "username":"admin",
+     *       "password":"admin",
+     *       "currency":"RUB"
+     *     }
+     *
+     * @apiParam {String} required_variable { "id":1,"role":1,"username": "admin","password": "admin","currency": "RUB"}
+     *
+     * @apiError UserNotFound The id of the User was not found.
      *
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
@@ -114,8 +145,6 @@ router.post('/createUser', validateSchema('new-user'),(req, res,next) => {
      *           "changedRows": 1
      *       }
      *
-     * @apiError UserNotFound The id of the User was not found.
-     *
      * @apiErrorExample Error-Response:
      *     HTTP/1.1 400 Not Found
      *     {
@@ -123,18 +152,18 @@ router.post('/createUser', validateSchema('new-user'),(req, res,next) => {
      *     }
      *
      */
-router.post('/updateUser', validateSchema('old-user'), (req, res) => {
-    let item = req.body;
+    router.post('/updateUser', validateSchema('old-user'), (req, res) => {
+        let item = req.body;
 
-    if( item.id === req.user.id || checkAdminPermissions(req) ) {
-        req.body.id
-        db.user.update(item).then(result => {
-            res.json(result);
-        });
-    }else{
-        res.json( {err:'no permissions'} );
-    }
-});
+        if( item.id === req.user.id || checkAdminPermissions(req) ) {
+            req.body.id
+            db.user.update(item).then(result => {
+                res.json(result);
+            });
+        }else{
+            res.json( {err:'no permissions'} );
+        }
+    });
 
 
     /**
@@ -145,6 +174,17 @@ router.post('/updateUser', validateSchema('old-user'), (req, res) => {
      * @apiSuccess {String} JSONStatus Status of the Sever.
      *
      * @apiPermission admin
+     *
+     * @apiParamExample {json} Param-Example:
+     *     {
+     *       "id":1,
+     *       "role":1,
+     *       "username":"admin",
+     *       "password":"admin",
+     *       "currency":"RUB"
+     *     }
+     *
+     * @apiParam {String} required_variable { "id":1,"role":1,"username": "admin","password": "admin","currency": "RUB"}
      *
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
@@ -168,7 +208,7 @@ router.post('/updateUser', validateSchema('old-user'), (req, res) => {
      *       "err":"not authenticated"
      *     }
      */
-router.post('/deleteUser', validateSchema('old-user'), (req, res) => {
+    router.post('/deleteUser', validateSchema('old-user'), (req, res) => {
         let item = req.body;
         if( item.id === req.user.id || checkAdminPermissions(req) ) {
             let item = req.body;
@@ -176,7 +216,7 @@ router.post('/deleteUser', validateSchema('old-user'), (req, res) => {
                 res.json(result);
             });
         }
-});
+    });
 
     /**
      * @api {post} /deleteAllUsers Delete All Users
@@ -201,7 +241,7 @@ router.post('/deleteUser', validateSchema('old-user'), (req, res) => {
      *       "err":"not authenticated"
      *     }
      */
-router.post('/deleteAllUsers', validateSchema('old-user'), (req, res) => {
+    router.post('/deleteAllUsers', validateSchema('old-user'), (req, res) => {
         let item = req.body;
         if( item.id === req.user.id || checkAdminPermissions(req) ) {
             let item = req.body;
@@ -209,7 +249,7 @@ router.post('/deleteAllUsers', validateSchema('old-user'), (req, res) => {
                 res.json(result);
             });
         }
-});
+    });
 
 
     /**
@@ -235,13 +275,13 @@ router.post('/deleteAllUsers', validateSchema('old-user'), (req, res) => {
      *       "err":"not authenticated"
      *     }
      */
-router.post('/logout', (req, res) => {
-    req.logout();
-    res.json({logout:"success"});
-});
+    router.post('/logout', (req, res) => {
+        req.logout();
+        res.json({logout:"success"});
+    });
 
 
-  /**
+    /**
      * @api {post} /login Login user
      * @apiName Login
      * @apiGroup USER
@@ -249,6 +289,8 @@ router.post('/logout', (req, res) => {
      * @apiSuccess {String} JSONStatus Status of the Sever.
      *
      * @apiPermission admin
+     *
+     * @apiParam {String} required_variable '{"username": "description","password": "description","currency": "string","description": "username of account"}'
      *
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
@@ -260,14 +302,15 @@ router.post('/logout', (req, res) => {
      *              "role": 1
      *           }
      *      }
-	 * @apiError UserNotFound The id of the User was not found.
-	 *
-	 * @apiErrorExample Error-Response:
-	 *     HTTP/1.1 400 Not Found
-	 *     {
-	 *       "err":"not authenticated"
-	 *     }
+     * @apiError UserNotFound The id of the User was not found.
+     *
+     * @apiErrorExample Error-Response:
+     *     HTTP/1.1 400 Not Found
+     *     {
+     *       "err":"not authenticated"
+     *     }
      */
+
 
     router.post(
         '/login',
@@ -351,11 +394,11 @@ router.post('/logout', (req, res) => {
      *       "err":"not authenticated"
      *     }
      */
-router.post('/transactionsGetAll',(req,res,next) => {
-    db.transation.getAll().then( result => {
-        res.json( result );
+    router.post('/transactionsGetAll',(req,res,next) => {
+        db.transation.getAll().then( result => {
+            res.json( result );
+        });
     });
-});
 
     /**
      * @api {post} /transactionsInsert Transactions Insert
@@ -387,12 +430,12 @@ router.post('/transactionsGetAll',(req,res,next) => {
      *       "err":"not authenticated"
      *     }
      */
-router.post('/transactionsInsert',validateSchema('transation-insert'),(req,res,next) => {
-    let item = req.body;
-    db.transation.insert(item).then( result => {
-        res.json( result );
+    router.post('/transactionsInsert',validateSchema('new-transation'),(req,res,next) => {
+        let item = req.body;
+        db.transation.insert(item).then( result => {
+            res.json( result );
+        });
     });
-});
 
     /**
      * @api {post} /transactionsUpdate transactions Update
@@ -424,12 +467,12 @@ router.post('/transactionsInsert',validateSchema('transation-insert'),(req,res,n
      *       "err":"not authenticated"
      *     }
      */
-router.post('/transactionsUpdate',(req,res,next) => {
-    let item = JSON.parse(req.body);
-    db.transation.update(item).then( result => {
-        res.json( result );
+    router.post('/transactionsUpdate',(req,res,next) => {
+        let item = JSON.parse(req.body);
+        db.transation.update(item).then( result => {
+            res.json( result );
+        });
     });
-});
 
     /**
      * @api {post} /transactionsDelete transactions Delete
@@ -461,12 +504,12 @@ router.post('/transactionsUpdate',(req,res,next) => {
      *       "err":"not authenticated"
      *     }
      */
-router.post('/transactionsDelete',(req,res,next) => {
-    let item = JSON.parse(req.body);
-    db.transation.delete(item).then( result => {
-        res.json( result );
+    router.post('/transactionsDelete',(req,res,next) => {
+        let item = JSON.parse(req.body);
+        db.transation.delete(item).then( result => {
+            res.json( result );
+        });
     });
-});
 
     /**
      * @api {post} /transactionsDeleteAll transactions Delete All
@@ -498,11 +541,11 @@ router.post('/transactionsDelete',(req,res,next) => {
      *       "err":"not authenticated"
      *     }
      */
-router.post('/transactionsDeleteAll',(req,res,next) => {
-    db.transation.deleteAll().then( result => {
-        res.json( result );
+    router.post('/transactionsDeleteAll',(req,res,next) => {
+        db.transation.deleteAll().then( result => {
+            res.json( result );
+        });
     });
-});
 
 
 // transactions end ===================================================================//
@@ -530,9 +573,9 @@ router.post('/transactionsDeleteAll',(req,res,next) => {
      *     ]
      *
      */
-router.get('/getCurrencies',(req,res,next) => {
+    router.get('/getCurrencies',(req,res,next) => {
         res.json( curensisArr );
-});
+    });
 
     /**
      * @api {get} /getCurrenciesApi get Currencies Api
@@ -575,30 +618,30 @@ router.get('/getCurrencies',(req,res,next) => {
         console.log(req.query.date_req)
         if(req.query.date_req != 'undefined') {
 
-        function getCurensise(){
-            axios({
-                url:`http://www.cbr.ru/scripts/XML_daily.asp?date_req=${req.query.date_req}`, //02/03/2002/
-                method:"get",
-                headers: { 'Content-type': 'text/html; charset=UTF-8' },
-                data:''
-            }).then( resp => {
-                let parser = new xml2js.Parser();
-                let currensis = [];
-                parser.parseString( resp.data, function (err, result) {
-                    currensis = result;
+            function getCurensise(){
+                axios({
+                    url:`http://www.cbr.ru/scripts/XML_daily.asp?date_req=${req.query.date_req}`, //02/03/2002/
+                    method:"get",
+                    headers: { 'Content-type': 'text/html; charset=UTF-8' },
+                    data:''
+                }).then( resp => {
+                    let parser = new xml2js.Parser();
+                    let currensis = [];
+                    parser.parseString( resp.data, function (err, result) {
+                        currensis = result;
                         res.json( currensis );
-                });
-            }).catch( err => {
-                console.log( err );
-                setTimeout( function(){
-                    getCurensise();
-                }, 30000);
-            })
+                    });
+                }).catch( err => {
+                    console.log( err );
+                    setTimeout( function(){
+                        getCurensise();
+                    }, 30000);
+                })
+            }
+            getCurensise();
+        }else{
+            res.json( {error:"no data"} );
         }
-        getCurensise();
-    }else{
-        res.json( {error:"no data"} );
-    }
 
     });
 

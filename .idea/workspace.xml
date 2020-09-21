@@ -2,18 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="52286686-59da-4d59-92eb-6d4eed8dc354" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/res_srv/db/currencies.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res_srv/validate/old-transation.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apidoc.json" beforeDir="false" afterPath="$PROJECT_DIR$/apidoc.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/res_srv/db/transation.js" beforeDir="false" afterPath="$PROJECT_DIR$/res_srv/db/transation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res_srv/db/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/res_srv/db/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res_srv/http/index.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/res_srv/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/res_srv/routes/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res_srv/validate/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/res_srv/validate/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res_srv/validate/new-user.json" beforeDir="false" afterPath="$PROJECT_DIR$/res_srv/validate/new-user.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res_srv/validate/old-user.json" beforeDir="false" afterPath="$PROJECT_DIR$/res_srv/validate/old-user.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res_srv/validate/transation-insert.json" beforeDir="false" afterPath="$PROJECT_DIR$/res_srv/validate/new-transation.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +34,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/res_srv/validate" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../testproj" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
@@ -64,6 +57,7 @@
       <workItem from="1600676712040" duration="1777000" />
       <workItem from="1600679443189" duration="1902000" />
       <workItem from="1600681988795" duration="1778000" />
+      <workItem from="1600696989881" duration="202000" />
     </task>
     <servers />
   </component>
@@ -71,6 +65,10 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1600697061515">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1600697061515" />
     <state x="616" y="240" key="run.anything.popup" timestamp="1600680128246">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -1,6 +1,7 @@
 let database = require('./conf');
 const mysql = require('mysql');
 const xml2js = require('xml2js');
+const axios = require('axios');
 
 const curensisArr = require('../db/currencies');
 
@@ -12,7 +13,7 @@ let transation ={};
 function getCurensiseByDate(data){
     return new Promise((resolve,reject)=> {
         let incomeCurrensis = curensisArr.indexOf(data.currency.toUpperCase());
-        if( incomeCurrensis !== 0 ) {
+        if( incomeCurrensis !== -1 ) {
             axios({
                 url: `http://www.cbr.ru/scripts/XML_daily.asp?date_req=${data.date}`, //02/03/2002/
                 method: "get",
@@ -20,13 +21,20 @@ function getCurensiseByDate(data){
                 data: ''
             }).then(resp => {
                 let parser = new xml2js.Parser();
+                let curensis = null;
                 parser.parseString(resp.data, function (err, result) {
                     curensis = result;
                 });
-                let curency = resp.data.ValCurs.Valute.filter(function (item) {
-                    return item.CharCode === curensisArr.indexOf(data.currency.toUpperCase());
+
+                let curency = curensis.ValCurs.Valute.filter(function (item) {
+                    return curensisArr.indexOf(item.CharCode[0]) === curensisArr.indexOf(data.currency.toUpperCase());
                 });
-                resolve(curency[0]);
+
+                if(curency.length > 0) {
+                    resolve(curency[0]);
+                }else{
+                    reject({err:'no curency match'});
+                }
             }).catch(err => {
                 reject(err);
             })
@@ -43,17 +51,17 @@ transation.getAll = () =>{
         connection.connect((err) => {
             if (err){
                 reject(err);
-            	throw err;
+                throw err;
             }
         });
-		connection.query('SELECT * FROM transactions', (err,rows) => {
-			if(err){
+        connection.query('SELECT * FROM transactions', (err,rows) => {
+            if(err){
                 reject(err);
-				throw err;
+                throw err;
             }
             connection.end();
             return resolve(rows);
-		});
+        });
     });
 };
 
@@ -117,37 +125,37 @@ transation.insert = (item) =>{
 
     let data = {date:item.date,currency:item.currency};
 
-        return new Promise((resolve,reject) => {
-            getCurensiseByDate(data).then( resp =>{
-                const connection = mysql.createConnection(database);
-                connection.connect((err) => {
-                    if (err){
-                        reject(err);
-                        throw err;
-                    }
-                });
+    return new Promise((resolve,reject) => {
+        getCurensiseByDate(data).then( resp =>{
+            const connection = mysql.createConnection(database);
+            connection.connect((err) => {
+                if (err){
+                    reject(err);
+                    throw err;
+                }
+            });
 
-                let values = [
-                    item.date,
-                    item.userid,
-                    (item.amount * Number(resp.Value)).toFixed(2) ,
-                    item.type,
-                    item.currency
-                ];
+            let values = [
+                new Date(item.date),
+                item.userid,
+                Number(( parseFloat(resp.Value[0].replace(",",".")) * item.amount  )).toFixed(2) ,
+                item.type,
+                item.currency
+            ];
 
-                let sql = "INSERT INTO `test-transactions`.`transactions` (`date`, `user_id`, `amount`, `type`, `currency`) VALUES (?, ?, ?, ?, ?)";
-                connection.query(sql , values , (err,rows) => {
-                    if(err){
-                        reject(err);
-                        throw err;
-                    }
-                    connection.end();
-                    return resolve(rows);
-                });
-            }).catch( error => {
-                reject( error );
-            })
-        });
+            let sql = "INSERT INTO `test-transactions`.`transactions` (`date`, `user_id`, `amount`, `type`, `currency`) VALUES (?, ?, ?, ?, ?)";
+            connection.query(sql , values , (err,rows) => {
+                if(err){
+                    reject(err);
+                    throw err;
+                }
+                connection.end();
+                return resolve(rows);
+            });
+        }).catch( error => {
+            reject( error );
+        })
+    });
 
 };
 
@@ -165,9 +173,10 @@ transation.update = (item) =>{
 
 
             let values = [
-                item.date,
+                //item.date,
+                new Date(item.date),
                 item.userid,
-                (item.amount * Number(resp.Value)).toFixed(2),
+                Number(( parseFloat(resp.Value[0].replace(",",".")) * item.amount  )).toFixed(2) ,
                 item.type,
                 item.currency,
                 item.id
